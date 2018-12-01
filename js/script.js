@@ -40,7 +40,7 @@ $('#color option[value="gold"]').hide();
 $('#color > option:first').text($firstVal);
 
 //Add a paragrapch tag to hold the email error message; hide it for now until user interaction
-$('<p id="emailError" class="errorMsg">Not correct email format</p>').insertAfter(emailInput);
+$('<p id="emailError" class="errorMsg">Email is format is incorrect</p>').insertAfter(emailInput);
 $('#emailError').hide();
 
 //Create a let variable for a counter that will keep track of if a checkbox is checked or not in Activities section
@@ -234,6 +234,7 @@ function showOrHideTip(show, element) {
   // show element when show is true, hide when false
   if (show) {
     element.style.border = '2px solid red';
+    $('#emailError').text('Email is format is incorrect');
     $('#emailError').show();
   } else {
     element.style.border = '1px solid #c1deeb';
