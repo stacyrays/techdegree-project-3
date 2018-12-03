@@ -21,11 +21,6 @@ const mainConf = 200;
 const workShop = 100;
 let newAmount = 0;
 
-//Create a paragraph tag to display the cost of the activities
-$(
-  '<p id="activitiesCost">Total cost for your Activities: ' + newAmount + "</p>"
-).insertAfter($(".activities"));
-
 //Hide the Other input field
 $("#other-title").hide();
 $("#label-other").hide();
@@ -43,12 +38,25 @@ $("#color > option:first").text($firstVal);
 
 //Add a paragrapch tag to hold the email error message; hide it for now until user interaction
 $(
-  '<p id="emailError" class="errorMsg">Email is format is incorrect</p>'
+  '<p id="emailError" class="errorMsg">Email format is incorrect</p>'
 ).insertAfter(emailInput);
 $("#emailError").hide();
 
 //Create a let variable for a counter that will keep track of if a checkbox is checked or not in Activities section
 let checkboxCounter = 0;
+
+//Add a paragraph tag to hold the activities error message; hide it for now until user interaction
+$(
+  '<p id="activitiesError" class="errorMsg">Please select at least one activity</p>'
+).insertAfter($(".activities legend"));
+$("#activitiesError").hide();
+
+//Create a paragraph tag to display the cost of the activities
+$(
+  '<p id="activitiesCost">Total cost for your Activities: $' +
+    newAmount +
+    "</p>"
+).insertAfter($(".activities"));
 
 //Remove the "Select payment type" text from the selection menu
 $selectPayment.remove();
@@ -108,6 +116,7 @@ $design.on("change", function() {
 
 //Check which ones are checkmarked in the Activities section and gray out the checkbox options that have conflicting days/times. Also update the total activities cost, with the new amount, as you check and uncheck items
 $activities.on("change", function(e) {
+  $("#activitiesError").hide();
   $selectPayment.remove();
   if ($(e.target).attr("name") === "js-frameworks") {
     if ($(e.target).is(":checked")) {
@@ -208,14 +217,14 @@ $activities.on("change", function(e) {
     if ($(e.target).is(":checked")) {
       newAmount += 200;
       $("#activitiesCost").html(
-        '<p id="activitiesCost">Total cost for your Activities: ' +
+        '<p id="activitiesCost">Total cost for your Activities: $' +
           newAmount +
           "</p>"
       );
     } else {
       newAmount -= 200;
       $("#activitiesCost").html(
-        '<p id="activitiesCost">Total cost for your Activities: ' +
+        '<p id="activitiesCost">Total cost for your Activities: $' +
           newAmount +
           "</p>"
       );
@@ -224,14 +233,14 @@ $activities.on("change", function(e) {
     if ($(e.target).is(":checked")) {
       newAmount += 100;
       $("#activitiesCost").html(
-        '<p id="activitiesCost">Total cost for your Activities: ' +
+        '<p id="activitiesCost">Total cost for your Activities: $' +
           newAmount +
           "</p>"
       );
     } else {
       newAmount -= 100;
       $("#activitiesCost").html(
-        '<p id="activitiesCost">Total cost for your Activities: ' +
+        '<p id="activitiesCost">Total cost for your Activities: $' +
           newAmount +
           "</p>"
       );
@@ -283,16 +292,17 @@ function isValidEmail(email) {
 }
 
 // Valid name: Can only contain letters a-z in lowercase
-/*function isValidName(name) {
+function isValidName(name) {
   //starts ^ and ends $ with a lower case letter
-  return /^[a-z]+$/.test(name);
-}*/
+  //return /^[a-z]+$/.test(name);
+  return nameInput.value.length >= 1;
+}
 
 function showOrHideTip(show, element) {
   // show element when show is true, hide when false
   if (show) {
     element.style.border = "2px solid red";
-    $("#emailError").text("Email is format is incorrect");
+    $("#emailError").text("Email format is incorrect");
     $("#emailError").show();
   } else {
     element.style.border = "1px solid #c1deeb";
@@ -311,7 +321,7 @@ function createListener(validator) {
 }
 
 //Set up the event listeners for running regex testing for each input box that is interacted with
-//nameInput.addEventListener("input", createListener(isValidName));
+nameInput.addEventListener("input", createListener(isValidName));
 
 emailInput.addEventListener("input", createListener(isValidEmail));
 
@@ -324,18 +334,16 @@ cvvInput.addEventListener("input", createListener(isValidCvv));
 //Do not allow the form to submit (e.preventDefault()) when certain conditions are true:
 btn.addEventListener("click", e => {
   //check for red border on any form elements will not allow form to submit
-  if (
-    nameInput.style.border === "2px solid red" ||
-    nameInput.value === "" ||
-    emailInput.value === ""
-  ) {
-    if (nameInput.value === "") {
-      nameInput.style.border = "2px solid red";
-    }
+  if (nameInput.value.length <= 0) {
+    nameInput.style.border = "2px solid red";
+    console.log("form did not submit");
     if (emailInput.value === "") {
       emailInput.style.border = "2px solid red";
       $("#emailError").text("Email cannot be blank");
       $("#emailError").show();
+    }
+    if (checkboxCounter <= 0) {
+      $("#activitiesError").show();
     }
     if (creditCardInput.value === "") {
       creditCardInput.style.border = "2px solid red";
@@ -352,8 +360,26 @@ btn.addEventListener("click", e => {
     emailInput.value === ""
   ) {
     emailInput.style.border = "2px solid red";
+    if (emailInput.value === "") {
+      $("#emailError").text("Email cannot be blank");
+      $("#emailError").show();
+    }
+    if (checkboxCounter <= 0) {
+      $("#activitiesError").show();
+    }
+    if (creditCardInput.value === "") {
+      creditCardInput.style.border = "2px solid red";
+    }
+    if (zipInput.value === "") {
+      zipInput.style.border = "2px solid red";
+    }
+    if (cvvInput.value === "") {
+      cvvInput.style.border = "2px solid red";
+    }
+    e.preventDefault();
     //if checkboxCounter is 0 or less, form cannot submit
   } else if (checkboxCounter <= 0) {
+    $("#activitiesError").show();
     e.preventDefault();
     console.log("form did not submit");
     //Check all credit card boxes, only if creditcard is chosen as a payment method
@@ -368,12 +394,15 @@ btn.addEventListener("click", e => {
   ) {
     if (creditCardInput.value === "") {
       creditCardInput.style.border = "2px solid red";
+      console.log("form did not submit");
     }
     if (zipInput.value === "") {
       zipInput.style.border = "2px solid red";
+      console.log("form did not submit");
     }
     if (cvvInput.value === "") {
       cvvInput.style.border = "2px solid red";
+      console.log("form did not submit");
     }
     e.preventDefault();
   } else {
