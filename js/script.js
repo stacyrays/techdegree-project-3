@@ -407,6 +407,6 @@ btn.addEventListener("click", e => {
     e.preventDefault();
   } else {
     //Success!
-    console.log("The form can successfully submit now!");
+    console.log("The form will successfully submit now!");
   }
 });
