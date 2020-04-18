@@ -20,14 +20,14 @@
 
       <form action="index.html" method="post">
         <fieldset>
-          <label for="name">Name:</label>
+          <label for="name">Name</label>
           <input type="text" id="name" name="user_name" />
 
-          <label for="mail">Email:</label>
+          <label for="mail">Email</label>
           <input type="email" id="mail" name="user_email" />
 
           <label for="title">Job Role</label>
-          <select id="title" name="user_title">
+          <select id="title" name="user_title" class="select-css">
             <option value="full-stack js developer"
               >Full Stack JavaScript Developer</option
             >
@@ -45,8 +45,8 @@
           <legend>Conference T-Shirt</legend>
 
           <div>
-            <label for="size">Size:</label>
-            <select id="size" name="user_size">
+            <label for="size">Size</label>
+            <select id="size" name="user_size" class="select-css">
               <option value="small">S</option>
               <option value="medium" selected>M</option>
               <option value="large">L</option>
@@ -55,17 +55,17 @@
           </div>
 
           <div>
-            <label for="design">Design:</label>
-            <select id="design" name="user_design">
+            <label for="design">Design</label>
+            <select id="design" name="user_design" class="select-css">
               <option>Select Theme</option>
               <option value="js puns">Theme - JS Puns</option>
               <option value="heart js">Theme - I &#9829; JS</option>
             </select>
           </div>
 
-          <div id="colors-js-puns" class="">
-            <label for="color">Color:</label>
-            <select id="color">
+          <div id="colors-js-puns">
+            <label for="color" class="extra-margin">Color</label>
+            <select id="color" class="select-css">
               <option value="cornflowerblue"
                 >Cornflower Blue (JS Puns shirt only)</option
               >
@@ -86,39 +86,47 @@
 
         <fieldset class="activities">
           <legend>Activity Registration</legend>
-          <label
-            ><input type="checkbox" name="all" /> Main Conference — $200</label
-          >
-          <label
+          <label class="container-cm"
+            ><input type="checkbox" name="all" /> Main Conference
+            <span class="not-bold"> $200</span><span class="checkmark"></span
+          ></label>
+          <label class="container-cm"
             ><input type="checkbox" name="js-frameworks" /> JavaScript
-            Frameworks Workshop — Tuesday 9am-12pm, $100</label
-          >
-          <label
+            Frameworks Workshop
+            <span class="not-bold"> Tuesday 9am-12pm, $100</span
+            ><span class="checkmark"></span
+          ></label>
+          <label class="container-cm"
             ><input type="checkbox" name="js-libs" /> JavaScript Libraries
-            Workshop — Tuesday 1pm-4pm, $100</label
-          >
-          <label
-            ><input type="checkbox" name="express" /> Express Workshop — Tuesday
-            9am-12pm, $100</label
-          >
-          <label
-            ><input type="checkbox" name="node" /> Node.js Workshop — Tuesday
-            1pm-4pm, $100</label
-          >
-          <label
-            ><input type="checkbox" name="build-tools" /> Build tools Workshop —
-            Wednesday 9am-12pm, $100</label
-          >
-          <label
-            ><input type="checkbox" name="npm" /> npm Workshop — Wednesday
-            1pm-4pm, $100</label
-          >
+            Workshop <span class="not-bold"> Tuesday 1pm-4pm, $100</span
+            ><span class="checkmark"></span
+          ></label>
+          <label class="container-cm"
+            ><input type="checkbox" name="express" /> Express Workshop
+            <span class="not-bold">Tuesday 9am-12pm, $100</span
+            ><span class="checkmark"></span
+          ></label>
+          <label class="container-cm"
+            ><input type="checkbox" name="node" /> Node.js Workshop
+            <span class="not-bold">Tuesday 1pm-4pm, $100</span
+            ><span class="checkmark"></span
+          ></label>
+          <label class="container-cm"
+            ><input type="checkbox" name="build-tools" /> Build tools Workshop
+            <span class="not-bold"> Wednesday 9am-12pm, $100</span
+            ><span class="checkmark"></span
+          ></label>
+          <label class="container-cm"
+            ><input type="checkbox" name="npm" /> npm Workshop
+            <span class="not-bold"> Wednesday 1pm-4pm, $100</span
+            ><span class="checkmark"></span
+          ></label>
         </fieldset>
         <fieldset>
           <legend>Payment Info</legend>
 
-          <label for="payment">I'm going to pay with:</label>
-          <select id="payment" name="user_payment">
+          <label for="payment">I'm going to pay with</label>
+          <select id="payment" name="user_payment" class="select-css">
             <option value="select_method">Select Payment Method</option>
             <option value="credit card">Credit Card</option>
             <option value="paypal">PayPal</option>
@@ -127,22 +135,22 @@
 
           <div id="credit-card" class="credit-card">
             <div class="col-6 col">
-              <label for="cc-num">Card Number:</label>
+              <label for="cc-num">Card Number</label>
               <input id="cc-num" name="user_cc-num" type="text" />
             </div>
 
             <div class="col-3 col">
-              <label for="zip">Zip Code:</label>
+              <label for="zip">Zip Code</label>
               <input id="zip" name="user_zip" type="text" />
             </div>
 
             <div class="col-3 col">
-              <label for="cvv">CVV:</label>
+              <label for="cvv">CVV</label>
               <input id="cvv" name="user_cvv" type="text" />
             </div>
 
-            <label for="exp-month">Expiration Date:</label>
-            <select id="exp-month" name="user_exp-month">
+            <label for="exp-month">Expiration Date</label>
+            <select id="exp-month" name="user_exp-month" class="select-css">
               <option value="1">1 - January</option>
               <option value="2">2 - February</option>
               <option value="3">3 - March</option>
@@ -156,8 +164,10 @@
               <option value="11">11 - November</option>
               <option value="12">12 - December</option>
             </select>
-            <label for="exp-year">Expiration Year:</label>
-            <select id="exp-year" name="user_exp-year">
+            <label for="exp-year" class="extra-margin-exp"
+              >Expiration Year</label
+            >
+            <select id="exp-year" name="user_exp-year" class="select-css">
               <option value="2016">2016</option>
               <option value="2017">2017</option>
               <option value="2018">2018</option>
